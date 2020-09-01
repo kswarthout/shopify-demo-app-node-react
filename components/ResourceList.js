@@ -1,15 +1,9 @@
+import { Context } from '@shopify/app-bridge-react';
+import { Redirect } from '@shopify/app-bridge/actions';
+import { Card, ResourceList, Stack, TextStyle, Thumbnail } from '@shopify/polaris';
 import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
-import {
-  Card,
-  ResourceList,
-  Stack,
-  TextStyle,
-  Thumbnail,
-} from '@shopify/polaris';
 import store from 'store-js';
-import { Redirect } from '@shopify/app-bridge/actions';
-import { Context } from '@shopify/app-bridge-react';
 
 const GET_PRODUCTS_BY_ID = gql`
   query getProducts($ids: [ID!]!) {
@@ -53,7 +47,6 @@ class ResourceListWithProducts extends React.Component {
       );
     };
 
-    const twoWeeksFromNow = new Date(Date.now() + 12096e5).toDateString();
     return (
       <Query query={GET_PRODUCTS_BY_ID} variables={{ ids: store.get('ids') }}>
         {({ data, loading, error }) => {
@@ -64,7 +57,7 @@ class ResourceListWithProducts extends React.Component {
             <Card>
               <ResourceList
                 showHeader
-                resourceName={{ singular: 'Product', plural: 'Products' }}
+                resourceName={{ singular: 'Booking', plural: 'Bookings' }}
                 items={data.nodes}
                 renderItem={(item) => {
                   const media = (
@@ -103,9 +96,6 @@ class ResourceListWithProducts extends React.Component {
                         </Stack.Item>
                         <Stack.Item>
                           <p>${price}</p>
-                        </Stack.Item>
-                        <Stack.Item>
-                          <p>Expires on {twoWeeksFromNow} </p>
                         </Stack.Item>
                       </Stack>
                     </ResourceList.Item>

@@ -11,11 +11,11 @@ import {
   TextField,
   Toast,
 } from '@shopify/polaris';
-import store from 'store-js';
 import gql from 'graphql-tag';
 import { Mutation } from 'react-apollo';
+import store from 'store-js';
 
-const UPDATE_PRICE = gql`
+const UPDATE_BOOKING = gql`
  mutation productVariantUpdate($input: ProductVariantInput!) {
    productVariantUpdate(input: $input) {
      product {
@@ -31,6 +31,7 @@ const UPDATE_PRICE = gql`
 
 class EditProduct extends React.Component {
   state = {
+    name: '',
     discount: '',
     price: '',
     variantId: '',
@@ -45,7 +46,7 @@ class EditProduct extends React.Component {
     const { name, price, discount, variantId } = this.state;
     return (
       <Mutation
-        mutation={UPDATE_PRICE}
+        mutation={UPDATE_BOOKING}
       >
         {(handleSubmit, { error, data }) => {
           const showError = error && (
